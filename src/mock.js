@@ -18,5 +18,18 @@ const produceNewsData = function () {
         data: articles
     }
 }
+
+const postData = function (res) {
+    const { password, username } = JSON.parse(res.body)
+    let resp = {response: 'default'}
+    if (username === 'username' && password === 'password'){
+        resp = {response: 'success'}
+    } else {
+        resp = {response: 'failed'}
+    }
+    return resp;
+}
+
 // 拦截ajax请求，配置mock的数据
-Mock.mock('/api/artickes', 'get', produceNewsData)
+Mock.mock('/api/data', 'get', produceNewsData)
+Mock.mock('/api/postdata', 'post', (res) => {postData(res)})

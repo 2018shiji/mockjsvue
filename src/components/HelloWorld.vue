@@ -1,8 +1,12 @@
 <template>
-
+    <ul>
+        <li v-for="item in data" v-bind:key="item">{{item}}</li>
+        <li>Response: {{result}}</li>
+    </ul>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   props: {
@@ -10,29 +14,27 @@ export default {
   },
   data () {
     return {
-      data: ["https://segmentfault.com/a/1190000010592626", "https://zhuanlan.zhihu.com/p/46396107"]
+        data: [],
+        result: '',
+        param: {username: 'username', password: 'password'}
     }
   },
   mounted() {
-    this.$axios.get()
+    // axios.get('/api/data').then(res => {
+    //     this.data = res.data;
+    //     console.log(res.data);
+    //     console.log(this.data)
+    // });
+    axios.post('/api/postData', this.param).then(resp => {
+        this.response = resp.data;
+        console.log(resp.data);
+        console.log(this.response);
+    })
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
