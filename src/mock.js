@@ -20,6 +20,7 @@ const produceNewsData = function () {
 }
 
 const postData = function (res) {
+    console.log("post method comes here")
     const { password, username } = JSON.parse(res.body)
     let resp = {response: 'default'}
     if (username === 'username' && password === 'password'){
@@ -27,9 +28,11 @@ const postData = function (res) {
     } else {
         resp = {response: 'failed'}
     }
-    return resp;
+    return {
+        data: resp
+    }
 }
 
 // 拦截ajax请求，配置mock的数据
 Mock.mock('/api/data', 'get', produceNewsData)
-Mock.mock('/api/postdata', 'post', (res) => {postData(res)})
+Mock.mock('/api/postData', 'post', postData)

@@ -20,16 +20,19 @@ export default {
     }
   },
   mounted() {
-    // axios.get('/api/data').then(res => {
-    //     this.data = res.data;
-    //     console.log(res.data);
-    //     console.log(this.data)
-    // });
+    axios.get('/api/data').then(res => {
+        this.data = res.data;
+        console.log(res.data);
+        console.log(this.data)
+    });
     axios.post('/api/postData', this.param).then(resp => {
-        this.response = resp.data;
+        this.result = resp.data;
+        console.log(resp);
         console.log(resp.data);
-        console.log(this.response);
     })
+  },
+  method() {
+
   }
 }
 </script>
